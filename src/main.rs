@@ -335,7 +335,7 @@ fn has_badge(msg: &Message, names: &[&str]) -> bool {
     for tag in msg.tags.as_ref().unwrap() {
         if tag.0.eq("badges") {
             for badge in tag.1.as_ref().unwrap().split(",") {
-                let (name, _) = badge.split_once("/").unwrap();
+                let (name, _) = badge.split_once("/").or(Some((badge, ""))).unwrap();
                 for n in names {
                     if name.eq(*n) {
                         return true;
